@@ -86,3 +86,83 @@ CREATE OR REPLACE FUNCTION hdr.in_white_list() RETURNS boolean
       (hdr.ip())::inet = ANY (hdr.white_list())
     END
 $$;
+
+-- get host, i.e. "localhost:3000"
+CREATE OR REPLACE FUNCTION hdr.host() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('host')
+$$;
+
+-- get origin, i.e. "http://localhost:8100"
+CREATE OR REPLACE FUNCTION hdr.origin() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('origin')
+$$;
+
+-- get referer, i.e. "http://localhost:8100/"
+CREATE OR REPLACE FUNCTION hdr.referer() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('referer')
+$$;
+
+-- get user-agent string
+CREATE OR REPLACE FUNCTION hdr.agent() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('user-agent')
+$$;
+
+-- get x-client-info, i.e. "supabase-js/1.35.7"
+CREATE OR REPLACE FUNCTION hdr.client() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('x-client-info')
+$$;
+
+-- get role (consumer), i.e. "anon-key"
+CREATE OR REPLACE FUNCTION hdr.role() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('x-consumer-username')
+$$;
+
+-- get consumer, i.e. "anon-key"
+CREATE OR REPLACE FUNCTION hdr.consumer() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('x-consumer-username')
+$$;
+
+-- get api server, i.e. "xxxxxxxxxxxxxxxx.supabase.co"
+CREATE OR REPLACE FUNCTION hdr.api_host() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('x-forwarded-host')
+$$;
+
+-- get api server domain, i.e. "xxxxxxxxxxxxxxxx.supabase.co"
+CREATE OR REPLACE FUNCTION hdr.domain() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('x-forwarded-host')
+$$;
+
+-- get project ref #, i.e. "xxxxxxxxxxxxxxxx"
+CREATE OR REPLACE FUNCTION hdr.projectref() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('x-forwarded-host')
+    SELECT SPLIT_PART(hdr.header('x-forwarded-host') || '.', '.', 1)
+$$;
+
+-- get project ref #, i.e. "xxxxxxxxxxxxxxxx"
+CREATE OR REPLACE FUNCTION hdr.ref() RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT hdr.header('x-forwarded-host')
+    SELECT SPLIT_PART(hdr.header('x-forwarded-host') || '.', '.', 1)
+$$;
+
