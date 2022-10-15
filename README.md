@@ -30,10 +30,7 @@ A set of functions for adding special features to your application that uses Pos
 | hdr.referer() | get referer, i.e. "http://localhost:8100/" | none | text |
 | hdr.agent() | get user-agent string | none | text |
 | hdr.client() | get x-client-info, i.e. "supabase-js/1.35.7" | none | text |
-| hdr.role() | get role (consumer), i.e. "anon-key" | none | text |
-| hdr.consumer() |  |   |   |
-| hdr.api_host() | get api server, i.e. "xxxxxxxxxxxxxxxx.supabase.co" | none | text |
-| hdr.domain() |  |   |   |
-| hdr.projectref() | get project ref #, i.e. "xxxxxxxxxxxxxxxx" | none | text |
-| hdr.ref() |  |   |   |
+| hdr.role()<br>hdr.consumer() | get role (consumer), i.e. "anon-key" | none | text |
+| hdr.api_host()<br>hdr.domain() | get api server, i.e. "xxxxxxxxxxxxxxxx.supabase.co" | none | text |
+| hdr.projectref()<br>hdr.ref() | get project ref #, i.e. "xxxxxxxxxxxxxxxx" | none | text |
 
