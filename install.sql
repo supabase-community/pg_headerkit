@@ -57,7 +57,7 @@ CREATE OR REPLACE FUNCTION hdr.in_black_list(ip inet) RETURNS boolean
       ip = ANY (hdr.black_list())
 $$;
 
--- Is the current user's ip in the white list?
+-- Is the current user's ip in the black list?
 CREATE OR REPLACE FUNCTION hdr.in_black_list() RETURNS boolean
     LANGUAGE sql IMMUTABLE
     AS $$
