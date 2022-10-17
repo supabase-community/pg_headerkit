@@ -1,4 +1,4 @@
-# pghdrkit: PostgREST Header Kit
+# pg_headerkit: PostgREST Header Kit
 A set of functions for adding special features to your application that uses PostgREST API calls to your PostgreSQL database, including:
 
 - ⬜️ rate limiting
