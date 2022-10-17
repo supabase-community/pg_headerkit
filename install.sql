@@ -166,3 +166,35 @@ CREATE OR REPLACE FUNCTION hdr.ref() RETURNS text
     SELECT SPLIT_PART(hdr.header('x-forwarded-host') || '.', '.', 1)
 $$;
 
+-- **********************************************
+-- ********* user-agent parse functions *********
+-- **********************************************
+
+-- user-agent parsing for mobile
+CREATE OR REPLACE FUNCTION hdr.is_mobile() RETURNS boolean
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT regexp_like(hdr.header('user-agent'),'mobile','i')
+$$;
+
+-- user-agent parsing for iPhone
+CREATE OR REPLACE FUNCTION hdr.is_iphone() RETURNS boolean
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT regexp_like(hdr.header('user-agent'),'iphone','i')
+$$;
+
+-- user-agent parsing for iPad
+CREATE OR REPLACE FUNCTION hdr.is_ipad() RETURNS boolean
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT regexp_like(hdr.header('user-agent'),'ipad','i')
+$$;
+
+-- user-agent parsing for Android
+CREATE OR REPLACE FUNCTION hdr.is_android() RETURNS boolean
+    LANGUAGE sql IMMUTABLE
+    AS $$
+    SELECT regexp_like(hdr.header('user-agent'),'android','i')
+$$;
+
