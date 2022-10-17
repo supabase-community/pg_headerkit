@@ -2,13 +2,13 @@
 A set of functions for adding special features to your application that uses PostgREST API calls to your PostgreSQL database, including:
 
 - ⬜️ rate limiting
-- ✅ IP whitelisting 
-- ✅ IP blacklisting
+- ✅ IP allowlisting 
+- ✅ IP denylisting
 - ⬜️ request logging
 - ⬜️ request filtering
 - ⬜️ request routing
-- ⬜️ user whitelisting by uid or email (Supabase-specific)
-- ⬜️ user blacklisting by uid or email (Supabase-specific)
+- ⬜️ user allowlisting by uid or email (Supabase-specific)
+- ⬜️ user denylisting by uid or email (Supabase-specific)
 
 ### Article
 See: [PostgREST Header Hacking](https://github.com/burggraf/postgrest-header-hacking)
@@ -20,12 +20,12 @@ See: [PostgREST Header Hacking](https://github.com/burggraf/postgrest-header-hac
 | hdr.headers()    | get all header values as a json object | none           | json object  |
 | hdr.header(item text) | get a header value | item (text) | text |
 | hdr.ip() | get the ip address of the current user | none | text |
-| hdr.white_list() | get the white list of ip addresses | none | inet[] (array of ip addresses) |
-| hdr.black_list() | get the black list of ip addresses | none | inet[] (array of ip addresses) |
-| hdr.in_black_list(ip inet) | determine if the given ip is in the black list | ip (inet) | boolean |
-| hdr.in_white_list(ip inet) | determine if the given ip is in the white list | ip (inet) | boolean |
-| hdr.in_black_list() | determine if the current user's ip is in the black list | none | boolean |
-| hdr.in_white_list() | determine if the current user's ip is in the white list | none | boolean |
+| hdr.allow_list() | get the allow list of ip addresses | none | inet[] (array of ip addresses) |
+| hdr.deny_list() | get the deny list of ip addresses | none | inet[] (array of ip addresses) |
+| hdr.in_deny_list(ip inet) | determine if the given ip is in the deny list | ip (inet) | boolean |
+| hdr.in_allow_list(ip inet) | determine if the given ip is in the allow list | ip (inet) | boolean |
+| hdr.in_deny_list() | determine if the current user's ip is in the deny list | none | boolean |
+| hdr.in_allow_list() | determine if the current user's ip is in the allow list | none | boolean |
 | hdr.host() | get host, i.e. "localhost:3000" | none | text |
 | hdr.origin() | get origin, i.e. "http://localhost:8100" | none | text |
 | hdr.referer() | get referer, i.e. "http://localhost:8100/" | none | text |

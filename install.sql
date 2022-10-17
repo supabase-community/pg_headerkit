@@ -1,13 +1,13 @@
 CREATE SCHEMA IF NOT EXISTS hdr;
 
-CREATE TABLE IF NOT EXISTS hdr.white_list (
+CREATE TABLE IF NOT EXISTS hdr.allow_list (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   ip inet NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   updated_at timestamp with time zone NOT NULL DEFAULT now()
 );
 
-CREATE TABLE IF NOT EXISTS hdr.black_list (
+CREATE TABLE IF NOT EXISTS hdr.deny_list (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   ip inet NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
@@ -35,55 +35,55 @@ CREATE OR REPLACE FUNCTION hdr.ip() RETURNS text
     SELECT SPLIT_PART(hdr.header('x-forwarded-for') || ',', ',', 1)
 $$;
 
--- get the white list
-CREATE OR REPLACE FUNCTION hdr.white_list() RETURNS inet[]
+-- get the allow list
+CREATE OR REPLACE FUNCTION hdr.allow_list() RETURNS inet[]
     LANGUAGE sql IMMUTABLE
     AS $$
-    SELECT array_agg(ip) FROM (SELECT ip FROM hdr.white_list) AS ip;
+    SELECT array_agg(ip) FROM (SELECT ip FROM hdr.allow_list) AS ip;
 $$;
 
--- get the black list
-CREATE OR REPLACE FUNCTION hdr.black_list() RETURNS inet[]
+-- get the deny list
+CREATE OR REPLACE FUNCTION hdr.deny_list() RETURNS inet[]
     LANGUAGE sql IMMUTABLE
     AS $$
-    SELECT array_agg(ip) FROM (SELECT ip FROM hdr.black_list) AS ip;
+    SELECT array_agg(ip) FROM (SELECT ip FROM hdr.deny_list) AS ip;
 $$;
 
--- Is the given ip in the black list?
-CREATE OR REPLACE FUNCTION hdr.in_black_list(ip inet) RETURNS boolean
+-- Is the given ip in the deny list?
+CREATE OR REPLACE FUNCTION hdr.in_deny_list(ip inet) RETURNS boolean
     LANGUAGE sql IMMUTABLE
     AS $$
     SELECT 
-      ip = ANY (hdr.black_list())
+      ip = ANY (hdr.deny_list())
 $$;
 
--- Is the current user's ip in the black list?
-CREATE OR REPLACE FUNCTION hdr.in_black_list() RETURNS boolean
+-- Is the current user's ip in the deny list?
+CREATE OR REPLACE FUNCTION hdr.in_deny_list() RETURNS boolean
     LANGUAGE sql IMMUTABLE
     AS $$
     SELECT CASE 
       WHEN hdr.ip() = '' THEN false
       ELSE 
-      (hdr.ip())::inet = ANY (hdr.black_list())
+      (hdr.ip())::inet = ANY (hdr.deny_list())
     END
 $$;
 
--- Is the given ip in the white list?
-CREATE OR REPLACE FUNCTION hdr.in_white_list(ip inet) RETURNS boolean
+-- Is the given ip in the allow list?
+CREATE OR REPLACE FUNCTION hdr.in_allow_list(ip inet) RETURNS boolean
     LANGUAGE sql IMMUTABLE
     AS $$
     SELECT 
-      ip = ANY (hdr.white_list())
+      ip = ANY (hdr.allow_list())
 $$;
 
--- Is the current user's ip in the white list?
-CREATE OR REPLACE FUNCTION hdr.in_white_list() RETURNS boolean
+-- Is the current user's ip in the allow list?
+CREATE OR REPLACE FUNCTION hdr.in_allow_list() RETURNS boolean
     LANGUAGE sql IMMUTABLE
     AS $$
     SELECT CASE 
       WHEN hdr.ip() = '' THEN false
       ELSE 
-      (hdr.ip())::inet = ANY (hdr.white_list())
+      (hdr.ip())::inet = ANY (hdr.allow_list())
     END
 $$;
 
