@@ -10,9 +10,10 @@ A set of functions for adding special features to your application that uses Pos
 - ⬜️ user whitelisting by uid or email (Supabase-specific)
 - ⬜️ user blacklisting by uid or email (Supabase-specific)
 
-## Function Reference
+### Article
+See: [PostgREST Header Hacking](https://github.com/burggraf/postgrest-header-hacking)
 
-### basic header functions
+### Function Reference
 
 | function         | description                            | parameters     | returns      |
 | ---------------- | -------------------------------------- | -------------- | ------------ |
