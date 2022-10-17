@@ -33,4 +33,9 @@ A set of functions for adding special features to your application that uses Pos
 | hdr.role()<br>hdr.consumer() | get role (consumer), i.e. "anon-key" | none | text |
 | hdr.api_host()<br>hdr.domain() | get api server, i.e. "xxxxxxxxxxxxxxxx.supabase.co" | none | text |
 | hdr.projectref()<br>hdr.ref() | get project ref #, i.e. "xxxxxxxxxxxxxxxx" | none | text |
+| hdr.is_mobile() | is mobile? | none | boolean |
+| hdr.is_iphone() | is iphone? | none | boolean |
+| hdr.is_ipad() | is ipad? | none | boolean |
+| hdr.is_android() | is android? | none | boolean |
+
 
