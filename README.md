@@ -1,9 +1,9 @@
 # pg_headerkit: PostgREST Header Kit
-A set of functions for adding special features to your application that uses PostgREST API calls to your PostgreSQL database, including:
+A set of functions for adding special features to your application that use PostgREST API calls to your PostgreSQL database.  These functions can be used inside PostgreSQL functions that can give your application the following capabilities at the database level:
 
 - ⬜️ rate limiting
-- ✅ IP allowlisting 
-- ✅ IP denylisting
+- ⬜️ IP allowlisting 
+- ⬜️ IP denylisting
 - ⬜️ request logging
 - ⬜️ request filtering
 - ⬜️ request routing
