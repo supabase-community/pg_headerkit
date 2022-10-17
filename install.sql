@@ -174,27 +174,27 @@ $$;
 CREATE OR REPLACE FUNCTION hdr.is_mobile() RETURNS boolean
     LANGUAGE sql IMMUTABLE
     AS $$
-    SELECT regexp_like(hdr.header('user-agent'),'mobile','i')
+    SELECT hdr.header('user-agent') ILIKE '%mobile%'
 $$;
 
 -- user-agent parsing for iPhone
 CREATE OR REPLACE FUNCTION hdr.is_iphone() RETURNS boolean
     LANGUAGE sql IMMUTABLE
     AS $$
-    SELECT regexp_like(hdr.header('user-agent'),'iphone','i')
+    SELECT hdr.header('user-agent') ILIKE '%iphone%'
 $$;
 
 -- user-agent parsing for iPad
 CREATE OR REPLACE FUNCTION hdr.is_ipad() RETURNS boolean
     LANGUAGE sql IMMUTABLE
     AS $$
-    SELECT regexp_like(hdr.header('user-agent'),'ipad','i')
+    SELECT hdr.header('user-agent') ILIKE '%ipad%'
 $$;
 
 -- user-agent parsing for Android
 CREATE OR REPLACE FUNCTION hdr.is_android() RETURNS boolean
     LANGUAGE sql IMMUTABLE
     AS $$
-    SELECT regexp_like(hdr.header('user-agent'),'android','i')
+    SELECT hdr.header('user-agent') ILIKE '%android%'
 $$;
 
