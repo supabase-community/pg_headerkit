@@ -3,4 +3,5 @@ comment = 'PostgreSQL functions that read PostgREST headers for adding functiona
 requires = ''
 default_version = '1.0'
 module_pathname = '$libdir/pg_headerkit'
-relocatable = true
+relocatable = false
+schema = hdr
